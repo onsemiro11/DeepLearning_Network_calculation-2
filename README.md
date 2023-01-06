@@ -20,4 +20,28 @@ $\hat{y}$ 은 $\hat{y}$ = wx + b 이다. (w는 weightm, b는 bias)
 
 Binary Classification을 할 때 사용하는 Loss Function이다.
 
+J = H( y , $\hat{y}$ ) = - $1 \over n$ [ y $\log$ ( $\hat{y}$ ) + ( 1 - y ) $\log$ ( 1 - $\hat{y}$ )]
+
+y = 0이면, 앞에 항이 0으로 사라져서 뒤에 항만 계산 가능하고 / y = 1이면, 뒤에 항이 0으로 사라져서 앞에 항만 계산 가능하다.
+
+ > Binary Classification의 특성상 y값이 0 또는 1이 나오기 때문에 위와 같은 식을 구현하여 Loss 값을 추출할 수 있게 됨!
+
+아래 그래프를 확인하면, 더 쉽게 식을 이해할 수 있다.
+
 ![Pasted Graphic](https://user-images.githubusercontent.com/49609175/210971610-3b0b8e23-a1ce-4aad-987c-abaaa0caf924.png)
+
+# CCE(Categorical Cross Entropy)
+
+클래스가 3개 이상인 데이터를 대상으로 사용하는 Loss Function이다. 주로 Softmax함수를 Activation Function으로 사용한다.
+
+출력층 노드 수는 클래스 수와 동일해야하고 동일하다. 출력된 벡터는 각 클래스에 속할 확률이 나오며, 총합이 1이다.
+
+$$Loss = -\frac{1}{N} \sum_{i=1}^{N} \sum_{i=1}^{C} t_{ij}\log(y_{ij})$$
+
+데이터셋 수 N개 만큼 합하여 평균을 낸 것이다.
+
+여기서 모든 클래스 수에 맞는 one hot encoding을 하게 되면 무의미한 0 달이 생겨 저장공간 이슈가 나타난다.
+
+이런 0을 없애서 matrix 상태를 하나의 vector 상태로 변환해준다. $\Rightarrow$ SCCE(Sparse Categroical Cross Entropy)
+
+

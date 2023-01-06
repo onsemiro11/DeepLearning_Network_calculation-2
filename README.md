@@ -6,11 +6,11 @@
 
 # MSE(Mean Squared Error)
 
-J = $1 \over n$ $\sum$ ( y - $\hat{y}$ ) $^2$
+$$MSE = \frac{1}{N} \sum_{i=1}^{N} ( y - \hat{y} ) ^2$$
 
 이 또한, 둘이 비슷할수록 0에 가까워지고, 둘의 차이가 클수록 $\infty$ 로 발산한다.
 
-$\hat{y}$ 은 $\hat{y}$ = wx + b 이다. (w는 weightm, b는 bias)
+$\hat{y}$ 은 $\hat{y}$ = wx + b 이다. (w는 weight, b는 bias)
 
 ( y - $\hat{y}$ ) $^2$ 는 아래로 볼록한 모형의 그래프를 형성할 것이다.
 
@@ -20,7 +20,7 @@ $\hat{y}$ 은 $\hat{y}$ = wx + b 이다. (w는 weightm, b는 bias)
 
 Binary Classification을 할 때 사용하는 Loss Function이다.
 
-J = H( y , $\hat{y}$ ) = - $1 \over n$ [ y $\log$ ( $\hat{y}$ ) + ( 1 - y ) $\log$ ( 1 - $\hat{y}$ )]
+$$BCE = H( y , \hat{y} ) = - \frac{1}{N} [ y \log ( \hat{y} ) + ( 1 - y ) \log ( 1 - \hat{y} )] $$
 
 y = 0이면, 앞에 항이 0으로 사라져서 뒤에 항만 계산 가능하고 / y = 1이면, 뒤에 항이 0으로 사라져서 앞에 항만 계산 가능하다.
 
@@ -36,7 +36,7 @@ y = 0이면, 앞에 항이 0으로 사라져서 뒤에 항만 계산 가능하�
 
 출력층 노드 수는 클래스 수와 동일해야하고 동일하다. 출력된 벡터는 각 클래스에 속할 확률이 나오며, 총합이 1이다.
 
-$$Loss = -\frac{1}{N} \sum_{i=1}^{N} \sum_{i=1}^{C} t_{ij}\log(y_{ij})$$
+$$CCE = -\frac{1}{N} \sum_{i=1}^{N} \sum_{i=1}^{C} t_{ij}\log(y_{ij})$$
 
 데이터셋 수 N개 만큼 합하여 평균을 낸 것이다.
 

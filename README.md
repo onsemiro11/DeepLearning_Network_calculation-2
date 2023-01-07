@@ -45,4 +45,4 @@ $$CCE = -\frac{1}{N} \sum_{i=1}^{N} \sum_{i=1}^{C} t_{ij}\log(y_{ij})$$
 이런 0을 없애서 matrix 상태를 하나의 vector 상태로 변환해준다. $\Rightarrow$ SCCE(Sparse Categroical Cross Entropy)
 
 
-# conv Layers
+# Conv2D Layers

@@ -46,3 +46,42 @@ $$CCE = -\frac{1}{N} \sum_{i=1}^{N} \sum_{i=1}^{C} t_{ij}\log(y_{ij})$$
 
 
 # Conv2D Layers
+
+## Correlation
+
+correlation은 Convolutional Neurons Network 에서 사용하는 대부분의 연산이다.
+
+$$ z = X \otimes F = \sum_{i=1}^{NH-1} \sum_{i=1}^{NW-1} X[i,j]F[i,j]
+ 
+[Classical Correlation]
+
+우리가 다루게 되는 것은 convolution 이라 부르지만, 실제로는 correlation이다.
+Correlation은 두 신호상이의 유사성을 측정해주는 도구다.
+ 
+  - 실수 값들로 구성된 X 행렬인 입력 데이터가 F(Filter)와 함께 correlation 연산이 된다.
+
+[Correlation with Bias]
+
+ 
+ -Correlation 에 bias 를 더해주는 연산이다. 아래는 Hight가 3이고 weight가 3인 행렬의 예시다.
+ 
+
+Correlation with Bias
+ 
+실제로 연산은 Correlation이지만, 주로 Convolution이라고 말을 하는 이유
+ 
+- Convolution : Filter를 180도 돌려서 연산하는 것이다. 어떤 filter를 통과한 output을 계산해준다.
+- Correlation : 두 신호 사이의 유사성을 측정해준다.
+   > 만약 Filter가 대칭행렬이면 convolution과 correlation이 같아서 옛날부터 같이 불러왔다고 한다.
+  
+[Correlation and Dot Product]
+
+ 
+ Dot Product는 Correlation의 Input과 Filter들의 행렬을 Flatten하여 연산하는 것이다.
+ 
+
+## Correlation and Dot Product
+
+ Dot Product는 Correlation의 Input과 Filter들의 행렬을 Flatten하여 연산하는 것이다.
+ 
+Affine Function이라 생각할 수 있지만, Correlation은 데이터 일부를 가져와 연산하는 것이므로, Fully connected layer와 Dense Layer와는 차이점이 있음을 인지해야한다.

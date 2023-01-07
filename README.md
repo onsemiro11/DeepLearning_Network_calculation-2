@@ -51,7 +51,7 @@ $$CCE = -\frac{1}{N} \sum_{i=1}^{N} \sum_{i=1}^{C} t_{ij}\log(y_{ij})$$
 
 correlation은 Convolutional Neurons Network 에서 사용하는 대부분의 연산이다.
 
-$$ z = X \otimes F = \sum_{i=1}^{NH-1} \sum_{i=1}^{NW-1} X[i,j]F[i,j]
+$$ z = X \otimes F = \sum_{i=1}^{NH-1} \sum_{i=1}^{NW-1} X[i,j]F[i,j] $$
  
 [Classical Correlation]
 
@@ -62,26 +62,55 @@ Correlation은 두 신호상이의 유사성을 측정해주는 도구다.
 
 [Correlation with Bias]
 
- 
- -Correlation 에 bias 를 더해주는 연산이다. 아래는 Hight가 3이고 weight가 3인 행렬의 예시다.
- 
-
-Correlation with Bias
+ $$ z = X \otimes F = \sum_{i=1}^{NH-1} \sum_{i=1}^{NW-1} X[i,j]F[i,j]+b $$
  
 실제로 연산은 Correlation이지만, 주로 Convolution이라고 말을 하는 이유
  
 - Convolution : Filter를 180도 돌려서 연산하는 것이다. 어떤 filter를 통과한 output을 계산해준다.
 - Correlation : 두 신호 사이의 유사성을 측정해준다.
    > 만약 Filter가 대칭행렬이면 convolution과 correlation이 같아서 옛날부터 같이 불러왔다고 한다.
-  
-[Correlation and Dot Product]
-
- 
- Dot Product는 Correlation의 Input과 Filter들의 행렬을 Flatten하여 연산하는 것이다.
  
 
 ## Correlation and Dot Product
 
  Dot Product는 Correlation의 Input과 Filter들의 행렬을 Flatten하여 연산하는 것이다.
  
+ $$ \sum_{i=1}^{NH-1} \sum_{i=1}^{NW-1} X[i,j]F[i,j]+b = (flatten(x))^T \cdot flatten(F) +b $$
+ 
 Affine Function이라 생각할 수 있지만, Correlation은 데이터 일부를 가져와 연산하는 것이므로, Fully connected layer와 Dense Layer와는 차이점이 있음을 인지해야한다.
+
+## Conv Layer
+
+ 
+[Window Extraction - Window Formularization]
+
+-사이즈를 정하고, 한칸씩 이동하며 만들어가며 하나하나 window를 구성해간다.
+ 자동차가 이동하면서 창문으로 보이는 변화되는 모습을 생각해보자. 여기서도 행렬속에서 사이즈에 맞게 한칸씩이동하면서 구성된 값들이 변화된다.
+-이 window가 correlation연산에 넣어지게 되는 것이다.
+ 
+[Computations of Conv Layer]
+
+각 window와 kernal을 correlation해준 후, bias를 더해주면 Z값이 생성된다.
+
+(affine Function이라 생각할 수 있지만, 변화되는 입력 데이터라는 점이 다르다.)
+
+생성된 Z 값은 activation Function에 넣어 나온 출력값이 한 모듈을 통과한 값이다.
+ 
+[n-Channel Input]
+
+Data가 이미지라면, R G B의 각 window들이 형성되어야할 것이다. 만약 이미지 속 그림이 5X5크기라면, f = 5  nc = 5
+-> window는 실수 5X5X3이 될것 이다.
+
+[Conv Layers]
+
+입력데이터 또는 전 layer의 출력값이 kernal를 통가하면 필터의 개수(ℓ1...)로 변한다. 
+ 
+nH 와 nW도 각 kernal에 의해 변하게 된다.
+
+filter는 window크기와 동일 하기 때문에
+nH 와 nW를 window로 묶어 나눠진 후에, filter와 correlation 연산이 진행된다는 점을 생각하면
+
+- nH[2] = nH[1] - f[2] +1
+- nW[2] = nW[1]- f[2] +1
+- 
+의 shape로 변화된다.

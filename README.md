@@ -112,5 +112,5 @@ nH 와 nW를 window로 묶어 나눠진 후에, filter와 correlation 연산이 
 
 - nH[2] = nH[1] - f[2] +1
 - nW[2] = nW[1]- f[2] +1
-- 
+
 의 shape로 변화된다.
